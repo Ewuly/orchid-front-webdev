@@ -6,6 +6,7 @@ import Footer from './footer';
 import { useDisclosure, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Card, CardHeader, CardBody, CardFooter, Button, Progress, Accordion, AccordionItem, Table, TableColumn, TableHeader, TableRow, TableBody, TableCell } from "@nextui-org/react";
 import { useSearchParams } from 'next/navigation';
 import { NextUIProvider } from "@nextui-org/system";
+import ConnectWallet from './connectWallet';
 
 interface Transaction {
     id: number;
@@ -180,7 +181,7 @@ export default function Dashboard() {
                         <>
                             <div>
                                 <div className="z-10 w-full items-center justify-center font-mono text-sm lg:flex">
-                                    {/* TEZOS CONNECT BUTTON */}
+                                    <ConnectWallet/>
                                 </div>
                                 {selectedCompany_FidelityProof && (
                                     <section className="flex items-center justify-center my-6">
