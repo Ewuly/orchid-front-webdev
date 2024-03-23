@@ -7,6 +7,7 @@ import { useDisclosure, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter
 import { useSearchParams } from 'next/navigation';
 import { NextUIProvider } from "@nextui-org/system";
 import ConnectWallet from './connectWallet';
+import MintButton from './mintButton';
 
 interface Transaction {
     id: number;
@@ -235,7 +236,7 @@ export default function Dashboard() {
                                                                 <>
                                                                     <ModalHeader className="flex flex-col gap-1">Mint your points</ModalHeader>
                                                                     <ModalBody className='flex flex-col items-center justify-center w-full'>
-                                                                        {/* DO THE MINT BUTTON */}
+                                                                        <MintButton company_name={selectedCompany_FidelityProof.label} user_name={"DupontJean"} fidelityLevel={2} /> 
                                                                     </ModalBody>
                                                                     <ModalFooter>
                                                                     </ModalFooter>
