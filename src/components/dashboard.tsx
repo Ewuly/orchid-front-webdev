@@ -29,6 +29,7 @@ interface CompanyDataProofs {
 export default function Dashboard() {
     const [selectedCompany_FidelityProof, setSelectedCompany_FidelityProof] = useState<CompanyDataProofs | null>(null);
     const [successPercentage, setSuccessPercentage] = useState(0);
+    const [totalValue, setTotalValue] = useState(0);
     const [validTransactions, setValidTransactions] = useState<Transaction[]>([]);
 
     const { isOpen, onOpen, onClose } = useDisclosure(); // To open the generate proof popup
@@ -119,6 +120,11 @@ export default function Dashboard() {
                     const numberOfValidTransactions = validTransactions.length;
                     console.log('Number of valid transactions:', numberOfValidTransactions);
 
+                    // Determine the number of token to mint.
+                    const totalValue = validTransactions.reduce((acc: number, cur: Transaction) => acc + cur.value, 0);
+                    console.log('Total value:', totalValue);
+                    setTotalValue(Math.floor(totalValue));
+
                     const targetObjective = parseInt(selectedCompany_FidelityProof?.value || '0', 10);
 
                     // Ensure the target objective is greater than 0 to avoid division by zero
@@ -182,7 +188,7 @@ export default function Dashboard() {
                         <>
                             <div>
                                 <div className="z-10 w-full items-center justify-center font-mono text-sm lg:flex">
-                                    <ConnectWallet/>
+                                    <ConnectWallet />
                                 </div>
                                 {selectedCompany_FidelityProof && (
                                     <section className="flex items-center justify-center my-6">
@@ -190,8 +196,8 @@ export default function Dashboard() {
                                             <Card className="w-full p-3 flex-col  bg-opacity-90 bg-slate-200">
                                                 <CardHeader className="flex flex-col items-center gap-3">
                                                     <div className="flex flex-row mt-2">
-                                                        <p className="mx-auto text-3xl font-bold pr-2">{successPercentage.toFixed(2)}%</p>
-                                                        <p className="text-3xl font-bold">Filled</p>
+                                                        <p className="mx-auto text-3xl font-bold pr-2">{totalValue}</p>
+                                                        <p className="text-3xl font-bold">MNP</p>
                                                     </div>
                                                     <div className="w-full">
                                                         <Progress color={successPercentage === 100 ? "success" : "warning"} aria-label="Loading..." value={successPercentage} />
@@ -200,11 +206,11 @@ export default function Dashboard() {
                                                 <CardBody>
                                                     {/* Display message based on the success percentage */}
                                                     <p className="mx-auto text-xl mb-4">
-                                                        {successPercentage === 100 ? "You fit the requirement!" : "You don't fit the requirement."}
+                                                        {successPercentage === 100 ? "Awesome! You're eligible to claim your points now." : "You don't have points to claim."}
                                                     </p>
                                                     <div>
                                                         <p className="text-xl font-semibold mb-4">Details:</p>
-                                                        <Accordion selectionMode="multiple">
+                                                        <Accordion defaultExpandedKeys={["1"]} selectionMode="multiple">
                                                             <AccordionItem key="1" aria-label="Transactions" title="Transactions">
                                                                 <Table aria-label="Example static collection table" className="m-2 w-9/10">
                                                                     <TableHeader>
@@ -225,7 +231,7 @@ export default function Dashboard() {
                                                     </div>
                                                 </CardBody>
                                                 <CardFooter className="mb-2">
-                                                    <Button aria-label="Generate proof" onPress={() => handleOpen()} className="mx-auto bg-tiffany_blue" isDisabled={successPercentage < 100} size='lg'>Generate a proof</Button>
+                                                    <Button aria-label="Generate proof" onPress={() => handleOpen()} className="mx-auto bg-tiffany_blue" isDisabled={successPercentage < 100} size='lg'>Claim your Points</Button>
                                                     <Modal
                                                         size="md"
                                                         isOpen={isOpen}
@@ -236,7 +242,7 @@ export default function Dashboard() {
                                                                 <>
                                                                     <ModalHeader className="flex flex-col gap-1">Mint your points</ModalHeader>
                                                                     <ModalBody className='flex flex-col items-center justify-center w-full'>
-                                                                        <MintButton company_name={selectedCompany_FidelityProof.label} user_name={"DupontJean"} fidelityLevel={2} /> 
+                                                                        <MintButton company_name={selectedCompany_FidelityProof.label} user_name={"DupontJean"} fidelityLevel={2} />
                                                                     </ModalBody>
                                                                     <ModalFooter>
                                                                     </ModalFooter>
