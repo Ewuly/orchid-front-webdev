@@ -10,10 +10,10 @@ import { parseUnits } from 'viem'
 interface MintButtonProps {
     company_name: string;
     user_name: string;
-    fidelityLevel: number;
+    totalAmount: number;
 }
 
-const MintButton: React.FC<MintButtonProps> = ({ company_name, user_name, fidelityLevel }) => {
+const MintButton: React.FC<MintButtonProps> = ({ company_name, user_name, totalAmount }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalContentToken, setModalContentToken] = useState('');
 
@@ -29,7 +29,7 @@ const MintButton: React.FC<MintButtonProps> = ({ company_name, user_name, fideli
             // Only set the account address if it's defined
             setAccountAddress(account.address);
             console.log('address', account);
-            let amountInWei = parseUnits('100', 18);
+            let amountInWei = parseUnits(totalAmount.toString(), 18);
             await mintToken(account.address, amountInWei);
         } else {
             console.error("Account or account address is undefined.");
@@ -68,8 +68,7 @@ const MintButton: React.FC<MintButtonProps> = ({ company_name, user_name, fideli
                         className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0"
                     />
                     <div className="ml-3">
-                        <h2 className="mb-1">EtherLink</h2>
-                        <p className="text-sm">Mint your rewards</p>
+                        <h2 className="mb-1 pr-2">EtherLink</h2>
                     </div>
                 </div>
             </Button>

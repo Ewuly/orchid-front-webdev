@@ -44,7 +44,7 @@ export default function Home() {
                 With Privacy.
               </h1>
               <p className="text-2xl mt-20 text-gray-300 mt-16 text-center">
-                Earn exclusive rewards and tokens for your purchases, backed by the security and privacy of zero-knowledge proofs. Experience the future of loyalty programs with OpenLab.
+                Earn exclusive rewards and tokens for your purchases, backed by the security and privacy of zero-knowledge proofs. Experience the future of loyalty programs with Cyrilabs.
               </p>
               <nav className="flex justify-center mt-20 p-8">
                 <Link href="/loyalty" className="text-2xl text-black mr-16 bg-white hover:bg-lavender font-bold font-sans py-4 px-14 rounded-lg transition duration-300">

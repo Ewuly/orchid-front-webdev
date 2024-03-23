@@ -121,7 +121,7 @@ export default function Dashboard() {
                     console.log('Number of valid transactions:', numberOfValidTransactions);
 
                     // Determine the number of token to mint.
-                    const totalValue = validTransactions.reduce((acc: number, cur: Transaction) => acc + cur.value, 0);
+                    const totalValue = validTransactions.reduce((acc: number, cur: Transaction) => acc + Math.abs(cur.value), 0);
                     console.log('Total value:', totalValue);
                     setTotalValue(Math.floor(totalValue));
 
@@ -242,7 +242,7 @@ export default function Dashboard() {
                                                                 <>
                                                                     <ModalHeader className="flex flex-col gap-1">Mint your points</ModalHeader>
                                                                     <ModalBody className='flex flex-col items-center justify-center w-full'>
-                                                                        <MintButton company_name={selectedCompany_FidelityProof.label} user_name={"DupontJean"} fidelityLevel={2} />
+                                                                        <MintButton company_name={selectedCompany_FidelityProof.label} user_name={"DupontJean"} totalAmount={totalValue} />
                                                                     </ModalBody>
                                                                     <ModalFooter>
                                                                     </ModalFooter>

@@ -21,7 +21,7 @@ const Header = () => {
                         />
                     </div>
                     <span className="text-2xl font-normal font-bold text-white hidden sm:block">
-                        OpenLab
+                        Cyrilabs
                     </span>
                 </Link>
                 <div className="flex flex-col items-center sm:items-start">

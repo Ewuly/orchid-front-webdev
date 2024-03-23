@@ -24,7 +24,7 @@ function ConnectWallet() {
           <button
             type="button"
             onClick={() => disconnect()}
-            className="bg-lavender hover:bg-thulian_pink-600 text-white font-semibold py-1 px-4 border border-transparent rounded-full shadow-lg transition ease-in-out duration-300 transform hover:-translate-y-1 hover:scale-105"
+            className="bg-blue-300 hover:bg-thulian_pink-600 text-white font-semibold py-1 px-4 border border-transparent rounded-full shadow-lg transition ease-in-out duration-300 transform hover:-translate-y-1 hover:scale-105"
           >
             Disconnect Wallet
           </button>
