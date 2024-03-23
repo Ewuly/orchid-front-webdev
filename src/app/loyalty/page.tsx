@@ -2,9 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/header';
-import Footer from '../../components/footer';
 import { Card, CardHeader, CardBody, CardFooter, Button } from "@nextui-org/react";
-import { Switch, Autocomplete, AutocompleteItem } from "@nextui-org/react";
+import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 import Image from 'next/image';
 
 interface CachedProof {
@@ -40,16 +39,6 @@ export default function LoyaltyProof() {
         }
     };
 
-    // Handle value change 
-    const handleValueChangeWeb2orWeb3 = (value: string, isSelected: boolean) => { // Know if web2 or web3
-        console.log('value', value, 'isSelected', isSelected)
-        if (isSelected) {
-            setSelectedValuesWeb2orWeb3([value]);
-        } else {
-            setSelectedValuesWeb2orWeb3([]);
-        }
-    };
-
     useEffect(() => {
         // Load cached data on component mount
         const loadedData = localStorage.getItem('companyDataProofs');
@@ -66,15 +55,15 @@ export default function LoyaltyProof() {
         }
     }, []);
 
-    const handleGenerateProofTransaction = async (selectedValues: string[]) => {
-        if (selectedValues.includes('web2') && companySelected) {
+    const handleGenerateProofTransaction = async () => {
+        if (companySelected) {
             localStorage.setItem('selectedCompany_FidelityProof', JSON.stringify(companySelected)); // For the dashboard to do the verification
             console.log('companySelected', companySelected);
 
             console.log('Redirecting to auth URL for web2...');
             window.location.href = `https://${process.env.NEXT_PUBLIC_DOMAINE}-sandbox.biapi.pro/2.0/auth/webview/connect?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}`;
 
-        } else if (selectedValues.includes('web3')) {
+        } else {
             // Need to call etherscan API
         }
     };
@@ -117,7 +106,7 @@ export default function LoyaltyProof() {
                             <Card isBlurred className="mx-auto py-4 bg-lavender bg-opacity-75 max-w-lg w-full">
                                 <CardHeader className="pb-5 pt-2 px-4 flex flex-col items-center justify-center text-center">
                                     <p className="text-3xl font-bold pb-4">Loyalty</p>
-                                    <small className="text-gray-900 text-sm">Connect your bank account to the app to demonstrate proof of consistent payments.</small>
+                                    <small className="text-gray-900 text-sm">Connect your bank account to the app to prove your payments.</small>
                                 </CardHeader>
                                 <CardBody className="overflow-visible py-2 px-10">
                                     <div key={'bordered'} className="flex flex-col w-full mb-6 gap-4">
@@ -142,16 +131,9 @@ export default function LoyaltyProof() {
                                             ))}
                                         </Autocomplete>
                                     </div>
-                                    <Switch className='mb-3'
-                                         color='warning' isSelected={selectedValuesWeb2orWeb3.includes('web2')} onValueChange={(isSelected) => handleValueChangeWeb2orWeb3('web2', isSelected)}>
-                                        Web2 Data
-                                    </Switch>
-                                    <Switch color='danger' isSelected={selectedValuesWeb2orWeb3.includes('web3')} onValueChange={(isSelected) => handleValueChangeWeb2orWeb3('web3', isSelected)}>
-                                        Web3 Data
-                                    </Switch>
                                 </CardBody>
                                 <CardFooter className="flex flex-col justify-center items-center space-y-2">
-                                    <Button onClick={() => handleGenerateProofTransaction(selectedValuesWeb2orWeb3)} className='bg-tiffany_blue' size="lg" aria-label="Generate proof" >
+                                    <Button onClick={() => handleGenerateProofTransaction()} className='bg-tiffany_blue' size="lg" aria-label="Generate proof" >
                                         Start
                                     </Button>
                                 </CardFooter>
@@ -159,7 +141,6 @@ export default function LoyaltyProof() {
                         </div>
                     </section>
                 </main >
-                <Footer />
             </div >
         </div >
     );
