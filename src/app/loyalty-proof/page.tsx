@@ -22,7 +22,7 @@ interface CompanyDataProofs {
     dataType: string;
 }
 
-export default function AllProofs() {
+export default function LoyaltyProof() {
     const [selectedValuesWeb2orWeb3, setSelectedValuesWeb2orWeb3] = useState<string[]>([]);
     const [companySelected, setCompanySelected] = useState<CachedProof | null>(null);
     const [cachedProofs, setCachedProofs] = useState<CachedProof[]>([]); // State to store cached data
@@ -72,7 +72,7 @@ export default function AllProofs() {
             console.log('companySelected', companySelected);
 
             console.log('Redirecting to auth URL for web2...');
-            // Call API for web2
+            window.location.href = `https://${process.env.NEXT_PUBLIC_DOMAINE}-sandbox.biapi.pro/2.0/auth/webview/connect?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}`;
 
         } else if (selectedValues.includes('web3')) {
             // Need to call etherscan API
@@ -151,7 +151,7 @@ export default function AllProofs() {
                                     </Switch>
                                 </CardBody>
                                 <CardFooter className="flex flex-col justify-center items-center space-y-2">
-                                    <Button onClick={() => handleGenerateProofTransaction(selectedValuesWeb2orWeb3)} className='bg-tiffany_blue' size="lg" >
+                                    <Button onClick={() => handleGenerateProofTransaction(selectedValuesWeb2orWeb3)} className='bg-tiffany_blue' size="lg" aria-label="Generate proof" >
                                         Start
                                     </Button>
                                 </CardFooter>
