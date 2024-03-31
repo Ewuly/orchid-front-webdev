@@ -5,9 +5,12 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Image from 'next/image';
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
+import SignUp from './sign/signUp'
 
 const Header = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpenResponsive, setisOpenResponsive] = useState(false);
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
     return (
         <header className="flex justify-center items-center z-10 py-10">
             <div className="flex justify-between items-center w-full pl-4">
@@ -20,12 +23,12 @@ const Header = () => {
                             height={48}
                         />
                     </div>
-                    <span className="text-2xl font-normal font-bold text-white hidden sm:block">
+                    <span className="text-2xl font-normal text-white hidden sm:block">
                         Cyrilabs
                     </span>
                 </Link>
                 <div className="flex flex-col items-center sm:items-start">
-                    <button className="sm:hidden" onClick={() => setIsOpen(!isOpen)}>
+                    <button className="sm:hidden" onClick={() => setisOpenResponsive(!isOpenResponsive)}>
                         <Image
                             src="/images/icon/menu.svg"
                             alt="Menu"
@@ -33,7 +36,7 @@ const Header = () => {
                             height={25}
                         />
                     </button>
-                    <nav className={`${isOpen ? 'flex' : 'hidden'} sm:flex flex-row items-center`}>
+                    <nav className={`${isOpenResponsive ? 'flex' : 'hidden'} sm:flex flex-row items-center`}>
                         <div className="flex flex-row items-center">
                             <Dropdown
                                 showArrow
@@ -59,7 +62,7 @@ const Header = () => {
                         <Link href="/#contact" className="text-white hover:text-lavender ml-4 px-6 py-2 text-xl transition duration-300">
                             Contact
                         </Link>
-                        <Button variant="bordered" href="/" size='lg' className={`${isOpen ? 'flex' : 'hidden'} sm:hidden items-center text-gray-700 text-xl border-gray-700 `}>
+                        <Button variant="bordered" href="/" size='lg' className={`${isOpenResponsive ? 'flex' : 'hidden'} sm:hidden items-center text-gray-700 text-xl border-gray-700 `}>
                             Enroll Now
                         </Button>
                     </nav>
@@ -78,9 +81,21 @@ const Header = () => {
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Login menu">
                         <DropdownItem key="sign-in" href="/" className='text-white'>Sign In</DropdownItem>
-                        <DropdownItem key="sign-up" href="/" className='text-white'>Sign Up</DropdownItem>
+                        <DropdownItem key="sign-up" onPress={onOpen} className='text-white'>Sign Up</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
+                <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                    <ModalContent>
+                        {(onClose) => (
+                            <>
+                                <ModalHeader className="flex flex-col gap-1">Sign Up</ModalHeader>
+                                <ModalBody>
+                                    <SignUp onClose={onClose} />
+                                </ModalBody>
+                            </>
+                        )}
+                    </ModalContent>
+                </Modal>
             </div>
         </header>
     );
