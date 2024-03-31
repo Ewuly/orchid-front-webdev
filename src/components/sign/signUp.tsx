@@ -8,11 +8,11 @@ interface SignUpProps {
 }
 
 const SignUp: React.FC<SignUpProps> = ({ onClose }) => {
-    const [login, setLogin] = useState<string>('');
+    const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [passwordConf, setPasswordConf] = useState<string>('');
-    const [errorMessageLogin, setErrorMessageLogin] = useState<string>('');
+    const [errorMessageUsername, setErrorMessageUsername] = useState<string>('');
     const [errorMessageEmail, setErrorMessageEmail] = useState<string>('');
     const [errorMessagePassword, setErrorMessagePassword] = useState<string>('');
     const [errorMessagePasswordConf, setErrorMessagePasswordConf] = useState<string>('');
@@ -20,13 +20,13 @@ const SignUp: React.FC<SignUpProps> = ({ onClose }) => {
     const [isSaving, setIsSaving] = useState<boolean>(false);
     const [isSaved, setIsSaved] = useState<boolean>(false);
 
-    const isValidLogin = (login: string): boolean => /^[a-zA-Z0-9]{3,}$/.test(login);
+    const isValidUsername = (username: string): boolean => /^[a-zA-Z0-9]{3,}$/.test(username);
     const isValidEmail = (email: string): boolean => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
     const isValidPassword = (password: string): boolean => /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password);
 
     const isValidPasswordConf = (passwordConf: string): boolean => passwordConf === password;
 
-    const disabled: boolean = isSaving || isSaved || !!errorMessageLogin || !!errorMessageEmail || !!errorMessagePassword || !!errorMessagePasswordConf || !login || !email || !password || !passwordConf;
+    const disabled: boolean = isSaving || isSaved || !!errorMessageUsername || !!errorMessageEmail || !!errorMessagePassword || !!errorMessagePasswordConf || !username || !email || !password || !passwordConf;
 
     const signUp = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -34,11 +34,11 @@ const SignUp: React.FC<SignUpProps> = ({ onClose }) => {
 
         try {
             const data = await signUpUser({
-                login,
+                username,
                 email,
                 password,
             });
-            setMessage(`${data.login} is now registered`);
+            setMessage(`${data.username} is now registered`);
             setIsSaved(true);
         } catch (error) {
             console.error('Error during sign up:', error);
@@ -51,15 +51,15 @@ const SignUp: React.FC<SignUpProps> = ({ onClose }) => {
         <form className="styleClass" onSubmit={signUp}>
             <fieldset>
                 <BasicInput
-                    id="Login"
-                    value={login}
-                    label="Login"
+                    id="Username"
+                    value={username}
+                    label="Username"
                     type="text"
                     placeholder="Laruiss"
-                    errorMessage={errorMessageLogin}
+                    errorMessage={errorMessageUsername}
                     validMessage=""
-                    onBlur={() => setErrorMessageLogin(!isValidLogin(login) ? 'Login is not valid' : '')}
-                    onChange={(e) => setLogin(e.target.value)}
+                    onBlur={() => setErrorMessageUsername(!isValidUsername(username) ? 'Username is not valid' : '')}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
 
                 <BasicInput

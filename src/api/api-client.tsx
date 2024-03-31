@@ -1,7 +1,7 @@
 // Define a TypeScript interface for the User
 interface User {
     id?: number; // Optional because it might not exist before a user is created
-    login: string;
+    username: string;
     email: string;
     password: string;
     // Add other user properties here
@@ -10,7 +10,7 @@ interface User {
 // Define a TypeScript type for the function that signs up a user
 export function signUpUser(user: User): Promise<User> {
     // API call to sign up a user
-    return fetch('http://localhost:3000/users', {
+    return fetch('http://localhost:3001/users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ export function signUpUser(user: User): Promise<User> {
             return response.json();
         })
         .then((data: User) => {
-            console.log(data);
+            console.log(data); // TO ERASE
             return data;
         })
         .catch(error => {
@@ -36,7 +36,7 @@ export function signUpUser(user: User): Promise<User> {
 // Define a TypeScript type for the function that gets all users
 export function getUsers(): Promise<User[]> {
     // API call to get all users
-    return fetch('http://localhost:3000/users', {
+    return fetch('http://localhost:3001/users', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export function getUsers(): Promise<User[]> {
 // Define a TypeScript type for the function that gets a single user by ID
 export function getUser(id: number): Promise<User> {
     // API call to get a single user by ID
-    return fetch(`http://localhost:3000/users/${id}`, {
+    return fetch(`http://localhost:3001/users/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
