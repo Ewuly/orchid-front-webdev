@@ -6,7 +6,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
-import PrivateRoute from "./Auth/PrivateRoute";
 import SignUp from './sign/signUp'
 import SignIn from './sign/signIn'
 
@@ -86,15 +85,15 @@ const Header = () => {
                         </Button>
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Login menu">
-                        <DropdownItem key="sign-in" onPress={() => onSignInOpenChange(true)} className='text-white'>Sign In</DropdownItem>
-                        <DropdownItem key="sign-up" onPress={() => onSignUpOpenChange(true)} className='text-white'>Sign Up</DropdownItem>
+                        <DropdownItem key="sign-in" onPress={() => onSignInOpenChange()} className='text-white'>Sign In</DropdownItem>
+                        <DropdownItem key="sign-up" onPress={() => onSignUpOpenChange()} className='text-white'>Sign Up</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
                 <Modal isOpen={isOpenSignUp} onOpenChange={onSignUpOpenChange}>
                     <ModalContent>
                         <ModalHeader>Sign Up</ModalHeader>
                         <ModalBody>
-                            <SignUp />
+                            <SignUp onClose={() => console.log("Close signup modal")} />
                         </ModalBody>
                     </ModalContent>
                 </Modal>
@@ -102,7 +101,7 @@ const Header = () => {
                     <ModalContent>
                         <ModalHeader>Sign In</ModalHeader>
                         <ModalBody>
-                            <SignIn />
+                            <SignIn onCloseConnection={() => console.log("Close signup modal")} />
                         </ModalBody>
                     </ModalContent>
                 </Modal>
