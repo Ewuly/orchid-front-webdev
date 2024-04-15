@@ -33,6 +33,32 @@ export function signUpUser(user: User): Promise<User> {
         });
 }
 
+export function signInUser(username:string, password:string): Promise<string> {
+    // API call to sign up a user
+    return fetch('http://localhost:3001/auth/token', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({username, password}),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then((data: any) => {
+            console.log(data); // TO ERASE
+            localStorage.setItem('token', data.token);
+            return data;
+        })
+        .catch(error => {
+            console.error('Error during sign up:', error);
+            throw error; // Re-throw to ensure errors can be handled where the function is called
+        });
+}
+
 // Define a TypeScript type for the function that gets all users
 export function getUsers(): Promise<User[]> {
     // API call to get all users

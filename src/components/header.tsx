@@ -6,11 +6,15 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@nextui-org/react";
+import PrivateRoute from "./Auth/PrivateRoute";
 import SignUp from './sign/signUp'
+import SignIn from './sign/signIn'
 
 const Header = () => {
     const [isOpenResponsive, setisOpenResponsive] = useState(false);
-    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const { isOpen: isOpenSignUp, onOpenChange: onSignUpOpenChange } = useDisclosure();
+    const { isOpen: isOpenSignIn, onOpenChange: onSignInOpenChange } = useDisclosure();
+
     return (
         <header className="flex justify-center items-center z-10 py-10">
             <div className="flex justify-between items-center w-full pl-4">
@@ -62,11 +66,13 @@ const Header = () => {
                         <Link href="/#contact" className="text-white hover:text-lavender ml-4 px-6 py-2 text-xl transition duration-300">
                             Contact
                         </Link>
+
                         <Button variant="bordered" href="/" size='lg' className={`${isOpenResponsive ? 'flex' : 'hidden'} sm:hidden items-center text-gray-700 text-xl border-gray-700 `}>
                             Enroll Now
                         </Button>
                     </nav>
                 </div>
+
 
                 <Dropdown
                     showArrow
@@ -75,27 +81,32 @@ const Header = () => {
                         content: "py-1 px-1 border border-default-200 bg-black bg-opacity-30",
                     }}>
                     <DropdownTrigger>
-                        <Button variant="bordered" href="/" size='lg' className={`hidden sm:block text-gray-700 text-xl border-gray-700 mr-4 `}>
+                        <Button variant="bordered" size='lg' className={`hidden sm:block text-gray-700 text-xl border-gray-700 mr-4 `}>
                             Enroll Now
                         </Button>
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Login menu">
-                        <DropdownItem key="sign-in" href="/" className='text-white'>Sign In</DropdownItem>
-                        <DropdownItem key="sign-up" onPress={onOpen} className='text-white'>Sign Up</DropdownItem>
+                        <DropdownItem key="sign-in" onPress={() => onSignInOpenChange(true)} className='text-white'>Sign In</DropdownItem>
+                        <DropdownItem key="sign-up" onPress={() => onSignUpOpenChange(true)} className='text-white'>Sign Up</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
-                <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                <Modal isOpen={isOpenSignUp} onOpenChange={onSignUpOpenChange}>
                     <ModalContent>
-                        {(onClose) => (
-                            <>
-                                <ModalHeader className="flex flex-col gap-1">Sign Up</ModalHeader>
-                                <ModalBody>
-                                    <SignUp onClose={onClose} />
-                                </ModalBody>
-                            </>
-                        )}
+                        <ModalHeader>Sign Up</ModalHeader>
+                        <ModalBody>
+                            <SignUp />
+                        </ModalBody>
                     </ModalContent>
                 </Modal>
+                <Modal isOpen={isOpenSignIn} onOpenChange={onSignInOpenChange}>
+                    <ModalContent>
+                        <ModalHeader>Sign In</ModalHeader>
+                        <ModalBody>
+                            <SignIn />
+                        </ModalBody>
+                    </ModalContent>
+                </Modal>
+
             </div>
         </header>
     );
