@@ -10,7 +10,7 @@ interface User {
 // Define a TypeScript type for the function that signs up a user
 export function signUpUser(user: User): Promise<User> {
     // API call to sign up a user
-    return fetch('https://orchid-backend-webdev.vercel.app/users', {
+    return fetch('https://orchid-backend-webdev-lbkg.vercel.app/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export function signUpUser(user: User): Promise<User> {
 
 export function signInUser(username:string, password:string): Promise<string> {
     // API call to sign up a user
-    return fetch('https://orchid-backend-webdev.vercel.app/auth/token', {
+    return fetch('https://orchid-backend-webdev-lbkg.vercel.app/auth/token', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ export function signInUser(username:string, password:string): Promise<string> {
 // Define a TypeScript type for the function that gets all users
 export function getUsers(): Promise<User[]> {
     // API call to get all users
-    return fetch('https://orchid-backend-webdev.vercel.app/users', {
+    return fetch('https://orchid-backend-webdev-lbkg.vercel.app/users', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ export function getUsers(): Promise<User[]> {
 // Define a TypeScript type for the function that gets a single user by ID
 export function getUser(id: number): Promise<User> {
     // API call to get a single user by ID
-    return fetch(`https://orchid-backend-webdev.vercel.app/${id}`, {
+    return fetch(`https://orchid-backend-webdev-lbkg.vercel.app/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
