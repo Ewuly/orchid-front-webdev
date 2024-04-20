@@ -40,10 +40,7 @@ const SignIn: React.FC<SignInProps> = ({ onCloseConnection }) => {
                 password,
             );
             console.log(data);
-            setMessage("Your mail is " + data.email);
-            
-
-            //TODO: close the modal
+            setMessage("Sign in successful: " + data.email);
 
         } catch (error) {
             console.error('Error during sign in:', error);

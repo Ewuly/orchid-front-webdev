@@ -49,12 +49,12 @@ export function signInUser(username:string, password:string): Promise<string> {
             return response.json();
         })
         .then((data: any) => {
-            console.log(data); // TO ERASE
-            localStorage.setItem('token', data.token);
+            console.log('Sign in successful:', data);
+            // localStorage.setItem('token', data.token);
             return data;
         })
         .catch(error => {
-            console.error('Error during sign up:', error);
+            console.error('Error during sign in:', error);
             throw error; // Re-throw to ensure errors can be handled where the function is called
         });
 }
