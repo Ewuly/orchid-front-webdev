@@ -1,5 +1,9 @@
 # Orchid
 
+## Video Demo
+
+https://github.com/Ewuly/orchid-front-webdev/assets/72886617/6aa24c85-9291-4a00-a8b6-d50b2fc9e37a
+
 ## Overview 🌟
 
 Orchid revolutionizes the intersection of Open Banking and blockchain technology, offering a pioneering solution that empowers users to get their loyalty to any organisation with unrivaled privacy and security. Utilizing an innovative API, the platform seamlessly connects users' bank accounts to a robust blockchain framework, we validate financial activities without compromising sensitive data.
