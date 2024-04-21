@@ -87,6 +87,7 @@ const Header = () => {
                     <DropdownMenu aria-label="Login menu">
                         <DropdownItem key="sign-in" onPress={onSignInOpen} className='text-white'>Sign In</DropdownItem>
                         <DropdownItem key="sign-up" onPress={onSignUpOpen} className='text-white'>Sign Up</DropdownItem>
+
                     </DropdownMenu>
                 </Dropdown>
                 <Modal isOpen={isOpenSignUp} onOpenChange={onSignUpOpenChange}>
@@ -99,6 +100,7 @@ const Header = () => {
                                 </ModalBody>
                             </>
                         )}
+
                     </ModalContent>
                 </Modal>
                 <Modal isOpen={isOpenSignIn} onOpenChange={onSignInOpenChange}>
@@ -111,6 +113,7 @@ const Header = () => {
                                 </ModalBody>
                             </>
                         )}
+
                     </ModalContent>
                 </Modal>
 

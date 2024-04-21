@@ -11,6 +11,7 @@ interface User {
 export function signUpUser(user: User): Promise<User> {
     // API call to sign up a user
     return fetch('https://orchid-backend-webdev-mby8.onrender.com/users', {
+
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -36,6 +37,7 @@ export function signUpUser(user: User): Promise<User> {
 export function signInUser(username:string, password:string): Promise<string> {
     // API call to sign up a user
     return fetch('https://orchid-backend-webdev-mby8.onrender.com/auth/token', {
+
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -63,6 +65,7 @@ export function signInUser(username:string, password:string): Promise<string> {
 export function getUsers(): Promise<User[]> {
     // API call to get all users
     return fetch('https://orchid-backend-webdev-mby8.onrender.com/users', {
+
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -87,7 +90,9 @@ export function getUsers(): Promise<User[]> {
 // Define a TypeScript type for the function that gets a single user by ID
 export function getUser(id: number): Promise<User> {
     // API call to get a single user by ID
+
     return fetch(`https://orchid-backend-webdev-mby8.onrender.com/users/${id}`, {
+
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
