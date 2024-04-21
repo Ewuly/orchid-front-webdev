@@ -11,8 +11,8 @@ import SignIn from './sign/signIn'
 
 const Header = () => {
     const [isOpenResponsive, setisOpenResponsive] = useState(false);
-    const { isOpen: isOpenSignUp, onOpenChange: onSignUpOpenChange } = useDisclosure();
-    const { isOpen: isOpenSignIn, onOpenChange: onSignInOpenChange } = useDisclosure();
+    const { isOpen: isOpenSignUp, onOpen: onSignUpOpen, onOpenChange: onSignUpOpenChange } = useDisclosure();
+    const { isOpen: isOpenSignIn, onOpen: onSignInOpen, onOpenChange: onSignInOpenChange } = useDisclosure();
 
     return (
         <header className="flex justify-center items-center z-10 py-10">
@@ -85,24 +85,35 @@ const Header = () => {
                         </Button>
                     </DropdownTrigger>
                     <DropdownMenu aria-label="Login menu">
-                        <DropdownItem key="sign-in" onPress={() => onSignInOpenChange()} className='text-white'>Sign In</DropdownItem>
-                        <DropdownItem key="sign-up" onPress={() => onSignUpOpenChange()} className='text-white'>Sign Up</DropdownItem>
+                        <DropdownItem key="sign-in" onPress={onSignInOpen} className='text-white'>Sign In</DropdownItem>
+                        <DropdownItem key="sign-up" onPress={onSignUpOpen} className='text-white'>Sign Up</DropdownItem>
+
                     </DropdownMenu>
                 </Dropdown>
                 <Modal isOpen={isOpenSignUp} onOpenChange={onSignUpOpenChange}>
                     <ModalContent>
-                        <ModalHeader>Sign Up</ModalHeader>
-                        <ModalBody>
-                            <SignUp onClose={() => console.log("Close signup modal")} />
-                        </ModalBody>
+                        {(onClose) => (
+                            <>
+                                <ModalHeader>Sign Up</ModalHeader>
+                                <ModalBody>
+                                    <SignUp onClose={onClose} />
+                                </ModalBody>
+                            </>
+                        )}
+
                     </ModalContent>
                 </Modal>
                 <Modal isOpen={isOpenSignIn} onOpenChange={onSignInOpenChange}>
                     <ModalContent>
-                        <ModalHeader>Sign In</ModalHeader>
-                        <ModalBody>
-                            <SignIn onCloseConnection={() => console.log("Close signup modal")} />
-                        </ModalBody>
+                        {(onCloseConnection) => (
+                            <>
+                                <ModalHeader>Sign In</ModalHeader>
+                                <ModalBody>
+                                    <SignIn onCloseConnection={onCloseConnection} />
+                                </ModalBody>
+                            </>
+                        )}
+
                     </ModalContent>
                 </Modal>
 
